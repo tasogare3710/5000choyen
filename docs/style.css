@@ -1,26 +1,38 @@
-div {
-	display: block;
+@font-face {
+  font-family: 'myfont';
+  src:
+    url('./font.ttf') format('truetype'),
 }
 
-h1{
-    font-size: 20px;
+:root {
+  --margin-gap: 1.0%;
 }
 
-input[type=text] {
-    font-size: 16px;
-    width: 95%;
-    max-width: 400px;
+form#app-settings, canvas {
+    display: inline-block;
 }
 
-.font-load{
-    font-family: 'Noto Sans JP';
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+form {
+    margin: var(--margin-gap) auto;
 }
 
-.scroll{
-    overflow:auto;
-    -webkit-overflow-scrolling: touch;
+fieldset {
+    margin-bottom: var(--margin-gap);
+}
+
+fieldset.gradient-settings fieldset {
+    display: inline-block;
+}
+
+label {
+    margin: 0.2rlh 0.5rlh auto auto;
+}
+
+input[type="text"] {
+    font-size: 110%;
+    width: calc(100dvw - 50dvw);
+}
+
+canvas {
+    outline: 1px solid;
 }

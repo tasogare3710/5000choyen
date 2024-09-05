@@ -1,43 +1,211 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
-	<meta charset="utf-8">
-	<title>5000兆円ジェネレーター</title>
-	<meta name="description" content="今、話題の5000兆円。そんな5000兆円のような画像を生成できる5000兆円ジェネレーターです。好きな文字を入れて素敵な5000兆円ライフを楽しもう！" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="5000兆円ジェネレーター" />
-	<meta name="twitter:description" content="5000兆円のような画像を生成できる5000兆円ジェネレーターです。" />
-	<meta name="twitter:image" content="image.png" />
-	<meta name="twitter:url" content="https://rare25.github.io/5000choyen/" />
-	<meta name="twitter:creator" content="@rariry_rare25" /> 
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:900&display=swap&subset=japanese" rel="stylesheet">
-	<script src="main.js"></script>
-</head>
-
-<body>
-	<h1>5000兆円ジェネレーター</h1>
-	<div>
-		<div class="scroll">
-		<image id="result"></image>
-		</div>
-	</div>
-	<div>
-		<input type="text" id="textbox" size="50" value="" spellcheck="false" oninput="loadFont();">
-		<button type="button" onclick="convertToImage();">画像を生成する</button>
-	</div>
-	<p>5000兆円風の画像を生成するツールです。</p>
-	<p>保存方法<br>
-	PC:右クリック→名前を付けて画像を保存<br>
-	スマホ:長押し→画像を保存</p>
-	<p>iOSでは描画に不具合があります。(棘が出る等)</p>
-	<div>
-		作者Twitter:<a href="https://twitter.com/rarity_rare25">@rarity_rare25</a> 
-		ソース:<a href="https://github.com/Rare25/5000choyen">5000choyen</a>
-	</div>
-	<span class="font-load">&nbsp;</span>
-</body>
-
+  <head>
+    <meta charset="utf-8">
+    <title>5000兆円ジェネレーター</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="module" src="main.js"></script>
+  </head>
+  <body>
+    <form id=app-settings>
+      <fieldset>
+        <legend>キャンバス</legend>
+        <label>width
+        <input type="number" id="canvasWidth" value="640" min="1"/>
+        </label>
+        <label>height
+        <input type="number" id="canvasHeight" value="480" min="1"/>
+        </label>
+        <label>
+        x
+        <input type="number" id="posX" value="0"/>
+        </label>
+        <label>
+        y
+        <input type="number" id="posY" value="0"/>
+        </label>
+        <label>ズーム
+        <input type="number" id="canvasZoom" value="100" min="1" max="1000"/>
+        </label>
+      </fieldset>
+      <fieldset id="canvasRenderingContext2D">
+        <legend>CanvasRenderingContext2D</legend>
+        <label>
+        フォントサイズ
+        <input type="number" id="fontSize" value="100" min="1"/>
+        </label>
+        <label>
+        線の太さ
+        <input type="number" id="lineWidth" value="22" min="1"/>
+        </label>
+        <label>
+          lineJoin
+          <select id="lineJoin">
+            <option value="miter" selected>miter</option>
+            <option value="bevel">bevel</option>
+            <option value="round">round</option>
+          </select>
+        </label>
+      </fieldset>
+      <fieldset class="gradient-settings" id="gradient1">
+        <legend>グラデーション１</legend>
+        <fieldset>
+        <legend>座標</legend>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="24"/>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="122"/>
+        </fieldset>
+        <fieldset>
+        <legend>色</legend>
+        <input type="color" list="gradient1-color1" value="#000f24"/>
+        <input type="color" list="gradient1-color2" value="#ffffff"/>
+        <input type="color" list="gradient1-color3" value="#373A3B"/>
+        <input type="color" list="gradient1-color4" value="#373A3B"/>
+        <input type="color" list="gradient1-color5" value="#C8C8C8"/>
+        <input type="color" list="gradient1-color6" value="#373A3B"/>
+        <input type="color" list="gradient1-color7" value="#19141F"/>
+        <input type="color" list="gradient1-color8" value="#F0F0F0"/>
+        <input type="color" list="gradient1-color9" value="#A6AFC2"/>
+        <input type="color" list="gradient1-color10" value="#323232"/>
+        </fieldset>
+        <datalist id="gradient1-color1">
+          <option value="#000f24"/>
+        </datalist>
+        <datalist id="gradient1-color2">
+          <option value="#ffffff"/>
+        </datalist>
+        <datalist id="gradient1-color3">
+          <option value="#373A3B"/>
+        </datalist>
+        <datalist id="gradient1-color4">
+          <option value="#373A3B"/>
+        </datalist>
+        <datalist id="gradient1-color5">
+          <option value="#C8C8C8"/>
+        </datalist>
+        <datalist id="gradient1-color6">
+          <option value="#373A3B"/>
+        </datalist>
+        <datalist id="gradient1-color7">
+          <option value="#19141F"/>
+        </datalist>
+        <datalist id="gradient1-color8">
+          <option value="#F0F0F0"/>
+        </datalist>
+        <datalist id="gradient1-color9">
+          <option value="#A6AFC2"/>
+        </datalist>
+        <datalist id="gradient1-color10">
+          <option value="#323232"/>
+        </datalist>
+      </fieldset>
+      <fieldset class="gradient-settings" id="gradient2">
+        <legend>グラデーション２</legend>
+        <fieldset>
+        <legend>座標</legend>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="20"/>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="100"/>
+        </fieldset>
+        <fieldset>
+        <legend>色</legend>
+        <input type="color" list="gradient2-color1" value="#FDF100"/>
+        <input type="color" list="gradient2-color2" value="#F5FDBB"/>
+        <input type="color" list="gradient2-color3" value="#FFFFFF"/>
+        <input type="color" list="gradient2-color4" value="#FDDB09"/>
+        <input type="color" list="gradient2-color5" value="#7F3500"/>
+        <input type="color" list="gradient2-color6" value="#F3C40B"/>
+        </fieldset>
+        <datalist id="gradient2-color1">
+          <option value="#FDF100"/>
+        </datalist>
+        <datalist id="gradient2-color2">
+          <option value="#F5FDBB"/>
+        </datalist>
+        <datalist id="gradient2-color3">
+          <option value="#FFFFFF"/>
+        </datalist>
+        <datalist id="gradient2-color4">
+          <option value="#FDDB09"/>
+        </datalist>
+        <datalist id="gradient2-color5">
+          <option value="#7F3500"/>
+        </datalist>
+        <datalist id="gradient2-color6">
+          <option value="#F3C40B"/>
+        </datalist>
+      </fieldset>
+      <fieldset class="gradient-settings" id="gradient3">
+        <legend>グラデーション３</legend>
+        <fieldset>
+        <legend>座標</legend>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="20"/>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="100"/>
+        </fieldset>
+        <fieldset>
+        <legend>色</legend>
+        <input type="color" list="gradient3-color1" value="#FF6400"/>
+        <input type="color" list="gradient3-color2" value="#7B0000"/>
+        <input type="color" list="gradient3-color3" value="#F00000"/>
+        <input type="color" list="gradient3-color4" value="#050000"/>
+        </fieldset>
+        <datalist id="gradient3-color1">
+          <option value="#FF6400"/>
+        </datalist>
+        <datalist id="gradient3-color2">
+          <option value="#7B0000"/>
+        </datalist>
+        <datalist id="gradient3-color3">
+          <option value="#F00000"/>
+        </datalist>
+        <datalist id="gradient3-color4">
+          <option value="#050000"/>
+        </datalist>
+      </fieldset>
+      <fieldset class="gradient-settings" id="gradient4">
+        <legend>グラデーション４</legend>
+        <fieldset>
+        <legend>座標</legend>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="20"/>
+        <input type="number" size="5" value="0"/>
+        <input type="number" size="5" value="100"/>
+        </fieldset>
+        <fieldset>
+        <legend>色</legend>
+        <input type="color" list="gradient4-color1" value="#E60000"/>
+        <input type="color" list="gradient4-color2" value="#7B0000"/>
+        <input type="color" list="gradient4-color3" value="#F00000"/>
+        <input type="color" list="gradient4-color4" value="#050000"/>
+        </fieldset>
+        <datalist id="gradient4-color1">
+          <option value="#E60000"/>
+        </datalist>
+        <datalist id="gradient4-color2">
+          <option value="#7B0000"/>
+        </datalist>
+        <datalist id="gradient4-color3">
+          <option value="#F00000"/>
+        </datalist>
+        <datalist id="gradient4-color4">
+          <option value="#050000"/>
+        </datalist>
+      </fieldset>
+      <label>
+      <input type="text" id="textbox"
+        placeholder="ここに描画したいテキストを入力" autofocus spellcheck="false"
+        list="textbox-default-text" value=""></input>
+      <datalist id="textbox-default-text">
+        <option value="5000兆円欲しい"/>
+      </datalist>
+      </label>
+      <button type="button" id="generateButton">生成</button>
+    </form>
+    <canvas id="canvas" width="640" height="480"></canvas>
+  </body>
 </html>
