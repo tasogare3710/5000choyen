@@ -3,35 +3,11 @@
   src: url('./font.ttf') format('truetype'),
 }
 
-:root {
-  --margin-gap: 1.0%;
-}
-
-form#app-settings, canvas {
-    display: inline-block;
-}
-
-form {
-    margin: var(--margin-gap) auto;
-}
-
 fieldset {
-    margin-bottom: var(--margin-gap);
-}
-
-fieldset.gradient-settings fieldset {
-    display: inline-block;
-}
-
-label {
-    margin: 0.2rlh 0.5rlh auto auto;
-}
-
-input[type="text"] {
-    font-size: 110%;
-    width: calc(100dvw - 50dvw);
+    margin: 1px;
 }
 
 canvas {
+    margin: 1px;
     outline: 1px solid;
 }
