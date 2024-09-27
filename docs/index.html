@@ -8,9 +8,10 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <form id=app-settings>
-      <fieldset>
+    <form id="app-settings">
+      <fieldset id="canvas-settings" disabled>
         <legend>キャンバス</legend>
+      <fieldset>
         <label>width
         <input type="number" id="canvasWidth" value="640" min="1"/>
         </label>
@@ -29,8 +30,7 @@
         <input type="number" id="canvasZoom" value="100" min="1" max="1000"/>
         </label>
       </fieldset>
-      <fieldset id="canvasRenderingContext2D">
-        <legend>CanvasRenderingContext2D</legend>
+      <fieldset>
         <label>
         フォントサイズ
         <input type="number" id="fontSize" value="100" min="1"/>
@@ -48,7 +48,8 @@
           </select>
         </label>
       </fieldset>
-      <fieldset class="gradient-settings" id="gradient1">
+      </fieldset>
+      <fieldset class="gradient-settings" id="gradient1" disabled>
         <legend>グラデーション１</legend>
         <fieldset>
         <legend>座標</legend>
@@ -101,7 +102,7 @@
           <option value="#323232"/>
         </datalist>
       </fieldset>
-      <fieldset class="gradient-settings" id="gradient2">
+      <fieldset class="gradient-settings" id="gradient2" disabled>
         <legend>グラデーション２</legend>
         <fieldset>
         <legend>座標</legend>
@@ -138,7 +139,7 @@
           <option value="#F3C40B"/>
         </datalist>
       </fieldset>
-      <fieldset class="gradient-settings" id="gradient3">
+      <fieldset class="gradient-settings" id="gradient3" disabled>
         <legend>グラデーション３</legend>
         <fieldset>
         <legend>座標</legend>
@@ -167,7 +168,7 @@
           <option value="#050000"/>
         </datalist>
       </fieldset>
-      <fieldset class="gradient-settings" id="gradient4">
+      <fieldset class="gradient-settings" id="gradient4" disabled>
         <legend>グラデーション４</legend>
         <fieldset>
         <legend>座標</legend>
@@ -196,6 +197,7 @@
           <option value="#050000"/>
         </datalist>
       </fieldset>
+      <fieldset id="generation-settings" disabled>
       <label>
       <input type="text" id="textbox"
         placeholder="ここに描画したいテキストを入力" autofocus spellcheck="false"
@@ -205,6 +207,7 @@
       </datalist>
       </label>
       <button type="button" id="generateButton">生成</button>
+      </fieldset>
     </form>
     <canvas id="canvas" width="640" height="480"></canvas>
   </body>

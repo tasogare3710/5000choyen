@@ -1,52 +1,81 @@
 const FONT_FAMILY = "myfont";
 
-var canvas = document.getElementById("canvas");
+var canvas;
+var canvasWidth;
+var canvasHeight;
+var posX;
+var posY;
+var canvasZoom;
+var fontSize;
+var lineWidth;
+var textbox;
+var lineJoin;
+var gradient1;
+var gradient2;
+var gradient3;
+var gradient4;
+var generateButton;
+var ctx;
 
-var canvasWidth = document.getElementById("canvasWidth");
-canvasWidth.addEventListener("input", resizeWidth);
+document.addEventListener("readystatechange", event => {
+    if (event.target.readyState === "complete") {
+        canvas = document.getElementById("canvas");
 
-var canvasHeight = document.getElementById("canvasHeight");
-canvasHeight.addEventListener("input", resizeheight);
+        canvasWidth = document.getElementById("canvasWidth");
+        canvasWidth.addEventListener("input", resizeWidth);
 
-var posX = document.getElementById("posX");
-posX.addEventListener("input", draw);
+        canvasHeight = document.getElementById("canvasHeight");
+        canvasHeight.addEventListener("input", resizeheight);
 
-var posY = document.getElementById("posY");
-posY.addEventListener("input", draw);
+        posX = document.getElementById("posX");
+        posX.addEventListener("input", draw);
 
-var canvasZoom = document.getElementById("canvasZoom");
-canvasZoom.addEventListener("input", function(event){
-    canvas.style.zoom = `${event.target.value}%`;
+        posY = document.getElementById("posY");
+        posY.addEventListener("input", draw);
+
+        canvasZoom = document.getElementById("canvasZoom");
+        canvasZoom.addEventListener("input", function(event) {
+            canvas.style.zoom = `${event.target.value}%`;
+        });
+
+        fontSize = document.getElementById("fontSize");
+        fontSize.addEventListener("input", draw);
+
+        lineWidth = document.getElementById("lineWidth");
+        lineWidth.addEventListener("input", draw);
+
+        textbox = document.getElementById("textbox");
+        textbox.addEventListener("input", draw);
+
+        lineJoin = document.getElementById("lineJoin");
+        lineJoin.addEventListener("input", draw);
+
+        gradient1 = document.getElementById("gradient1");
+        gradient1.addEventListener("input", draw);
+
+        gradient2 = document.getElementById("gradient2");
+        gradient2.addEventListener("input", draw);
+
+        gradient3 = document.getElementById("gradient3");
+        gradient3.addEventListener("input", draw);
+
+        gradient4 = document.getElementById("gradient4");
+        gradient4.addEventListener("input", draw);
+
+        generateButton = document.getElementById("generateButton");
+        generateButton.addEventListener("click", draw);
+
+        ctx = canvas.getContext('2d');
+
+        for (let form of [
+                document.getElementById("canvas-settings"),
+                gradient1, gradient2, gradient3, gradient4,
+                document.getElementById("generation-settings"),
+            ]) {
+            form.disabled = false;
+        }
+    }
 });
-
-var fontSize = document.getElementById("fontSize");
-fontSize.addEventListener("input", draw);
-
-var lineWidth = document.getElementById("lineWidth");
-lineWidth.addEventListener("input", draw);
-
-var textbox = document.getElementById("textbox");
-textbox.addEventListener("input", draw);
-
-var lineJoin = document.getElementById("lineJoin");
-lineJoin.addEventListener("input", draw);
-
-var gradient1 = document.getElementById("gradient1");
-gradient1.addEventListener("input", draw);
-
-gradient2 = document.getElementById("gradient2");
-gradient2.addEventListener("input", draw);
-
-gradient3 = document.getElementById("gradient3");
-gradient3.addEventListener("input", draw);
-
-gradient4 = document.getElementById("gradient4");
-gradient4.addEventListener("input", draw);
-
-var generateButton = document.getElementById("generateButton");
-generateButton.addEventListener("click", draw);
-
-var ctx = canvas.getContext('2d');
 
 function resizeWidth(event) {
     canvas.setAttribute("width", canvasWidth.value);
@@ -59,8 +88,8 @@ function resizeheight(event) {
 }
 
 function draw(event) {
-	const NUMBER_INPUT_BASE = 1;
-	const COLOR_PICKER_BASE = NUMBER_INPUT_BASE + 5;
+    const NUMBER_INPUT_BASE = 1;
+    const COLOR_PICKER_BASE = NUMBER_INPUT_BASE + 5;
     const posx = Number(posX.value);
     const posy = Number(posY.value);
     const LINE_WIDTH = Number(lineWidth.value);
